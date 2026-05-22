@@ -2,6 +2,8 @@
 
 Vue 3 + TypeScript + SCSS + Storybook component-library starter generated from the Figma base components.
 
+Repository: `knowledge-base` / B端 AI知识库
+
 ## Stack
 
 - Vue 3
