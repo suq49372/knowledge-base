@@ -1,0 +1,18 @@
+@use './tokens';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f8fa;
+  color: var(--xue-text-primary);
+  font-family: var(--xue-font-family);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}

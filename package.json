@@ -1,0 +1,28 @@
+{
+  "name": "b-ai-design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vue-tsc -b && vite build",
+    "storybook": "storybook dev -p 6007 --host 0.0.0.0",
+    "build-storybook": "storybook build",
+    "typecheck": "vue-tsc -b"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.7",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/vue3-vite": "^8.4.7",
+    "@types/node": "^25.7.0",
+    "@types/pug": "^2.0.10",
+    "sass": "^1.83.0",
+    "storybook": "^8.4.7",
+    "typescript": "^5.7.2",
+    "vue-tsc": "^2.2.0"
+  }
+}
