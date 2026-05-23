@@ -110,10 +110,66 @@ const lookupSteps = [
   },
 ];
 
+const generationRules = [
+  {
+    title: '1. Storybook 优先级',
+    body: '使用 Storybook 生成 Figma 设计稿时，Storybook 的 token、组件 API、组件状态、iconMap 和默认画板尺寸优先级高于参考图截图。',
+    examples: ['默认画板使用 1512 × 982', '参考图 1520 × 982 时仍以 Storybook token 为准', '颜色、字号、圆角、间距优先读取 --xue-* token'],
+  },
+  {
+    title: '2. 组件必须先查再画',
+    body: '生成前先查 Storybook 是否已有组件；已有组件必须按组件 API 和状态还原，不能先手动画近似组件。',
+    examples: ['XueButton: content / color / size / disabled', 'XueTag: color / styleType / closable / icon', 'XueTabs: variant / size / active item'],
+  },
+  {
+    title: '3. Icon 必须精确映射',
+    body: 'Icon 必须从 XueIcon 的 iconMap 精确映射。禁止用文字、圆形、矩形临时拼近似图标；缺失 icon 必须明确标注。',
+    examples: ['工作台 -> grid-fill', '课程资料 -> folder-fill', '作业 -> paper', '帮助 -> question', '云端 -> cloud', '更多 -> more'],
+  },
+  {
+    title: '4. 页面级缺口要标注',
+    body: '如果 Storybook 没有页面级业务组件，可以用基础组件组合，但图层命名必须说明 composed from 哪些 Storybook 组件。',
+    examples: ['ClassCard composed from XueTag', 'QuickEntryCard composed from XueIcon + token card', 'DataPanel composed from XueTabs + XueButton + XueTable'],
+  },
+  {
+    title: '5. 必须生成 Auto Layout 版',
+    body: 'Figma 设计稿必须优先使用 Auto Layout，禁止整页主要依赖绝对坐标堆图层。绝对定位只允许用于图标细节、装饰元素或特殊遮罩。',
+    examples: ['AppShell: horizontal', 'Main: vertical fill', 'ClassList: vertical', 'Toolbar: horizontal', 'Table: vertical + row horizontal'],
+  },
+  {
+    title: '6. Sizing 必须明确',
+    body: 'Auto Layout 中每个关键层级都要明确 FIXED / HUG / FILL。表格可以固定列宽，但表格整体、表头和表行必须用 Auto Layout 组织。',
+    examples: ['Sidebar fixed 180', 'Topbar fixed 60', 'Main fill', 'Button hug', 'Table row horizontal', 'Table cell fixed width'],
+  },
+];
+
+const deliveryChecks = [
+  {
+    title: '1. 节点信息必须返回',
+    body: '交付设计稿时必须说明页面名、画板名、nodeId、坐标和尺寸，方便在 Figma 中定位。',
+  },
+  {
+    title: '2. 生成后必须截图校验',
+    body: '截图校验不只看整体，还要检查画板尺寸、icon 是否匹配、文本是否溢出、操作列是否换行、是否存在多余说明文字。',
+  },
+  {
+    title: '3. Auto Layout 必须验收',
+    body: '交付时必须说明关键 Frame 的 Auto Layout 结构，并检查 layoutMode、itemSpacing、padding、layoutSizingHorizontal、layoutSizingVertical。',
+  },
+  {
+    title: '4. 超时后必须确认结果',
+    body: 'Figma 写入超时后不能直接重复生成；必须先检查是否实际生成了节点，避免留下多个混乱版本。',
+  },
+  {
+    title: '5. 最终必须做组件审计',
+    body: '交付说明必须列出已使用 Storybook 组件、组合组件、缺失组件/图标、是否修改 Storybook。',
+  },
+];
+
 const AIDesignWorkflow = defineComponent({
   name: 'AIDesignWorkflow',
   setup() {
-    return { workflowRules, lookupSteps };
+    return { workflowRules, lookupSteps, generationRules, deliveryChecks };
   },
   template: `
     <main class="ai-workflow-page">
@@ -155,6 +211,39 @@ const AIDesignWorkflow = defineComponent({
             <div v-if="step.examples" class="ai-workflow-tags">
               <span v-for="example in step.examples" :key="example">{{ example }}</span>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="ai-workflow-section">
+        <div class="ai-workflow-section__heading">
+          <h2 class="ai-workflow-section__title">Storybook 生成 Figma 硬约束</h2>
+          <p class="ai-workflow-page__description">
+            使用 Storybook 生成 Figma 设计稿时，必须生成可维护的 Auto Layout 版，而不是静态摆放版。
+          </p>
+        </div>
+        <div class="ai-workflow-steps">
+          <article v-for="rule in generationRules" :key="rule.title" class="ai-workflow-step">
+            <h3 class="ai-workflow-card__title">{{ rule.title }}</h3>
+            <p class="ai-workflow-card__body">{{ rule.body }}</p>
+            <div v-if="rule.examples" class="ai-workflow-tags">
+              <span v-for="example in rule.examples" :key="example">{{ example }}</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="ai-workflow-section">
+        <div class="ai-workflow-section__heading">
+          <h2 class="ai-workflow-section__title">交付验收规则</h2>
+          <p class="ai-workflow-page__description">
+            设计稿生成完成后，必须同时检查视觉结果、组件映射、Auto Layout 结构和 Figma 定位信息。
+          </p>
+        </div>
+        <div class="ai-workflow-grid">
+          <article v-for="check in deliveryChecks" :key="check.title" class="ai-workflow-card">
+            <h3 class="ai-workflow-card__title">{{ check.title }}</h3>
+            <p class="ai-workflow-card__body">{{ check.body }}</p>
           </article>
         </div>
       </section>

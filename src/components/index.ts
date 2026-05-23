@@ -17,3 +17,6 @@ export { default as XueBreadcrumb } from './Breadcrumb/Breadcrumb.vue';
 export { default as XueDropdown } from './Dropdown/Dropdown.vue';
 export { default as XueDateTimeInput } from './DateTimeInput/DateTimeInput.vue';
 export { default as XueSelectCascader } from './SelectCascader/SelectCascader.vue';
+export { default as XueAvatar } from './Avatar/Avatar.vue';
+export { default as XueEmptyStateIcon } from './EmptyStateIcon/EmptyStateIcon.vue';
+export { default as XueTopbar } from './Topbar/Topbar.vue';
