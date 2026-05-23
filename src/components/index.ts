@@ -20,3 +20,11 @@ export { default as XueSelectCascader } from './SelectCascader/SelectCascader.vu
 export { default as XueAvatar } from './Avatar/Avatar.vue';
 export { default as XueEmptyStateIcon } from './EmptyStateIcon/EmptyStateIcon.vue';
 export { default as XueTopbar } from './Topbar/Topbar.vue';
+export { default as XueQuestionCard } from './BusinessCards/QuestionCard.vue';
+export { default as XueKnowledgeMapCard } from './BusinessCards/KnowledgeMapCard.vue';
+export { default as XueClassExamCard } from './BusinessCards/ClassExamCard.vue';
+export { default as XueResultCard } from './BusinessCards/ResultCard.vue';
+export { default as XueDataCard } from './BusinessCards/DataCard.vue';
+export { default as XueParentMeetingCard } from './BusinessCards/ParentMeetingCard.vue';
+export { default as XueQuickEntryCard } from './BusinessCards/QuickEntryCard.vue';
+export { default as XuePageHeaderContent } from './BusinessCards/PageHeaderContent.vue';
