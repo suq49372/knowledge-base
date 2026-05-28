@@ -84,7 +84,7 @@ const workflowRules = [
 const lookupSteps = [
   {
     title: '1. 先确认画板规格',
-    body: 'B 端设计稿默认画板为 1512 × 982，不自行放大到 1920 或其他尺寸。如果需求是长页面，则宽度仍为 1512px，高度按内容自适应。',
+    body: 'B 端设计稿默认画板为 1512 × 982，不自行放大到 1920、参考图原图像素或其他尺寸。如果需求是长页面，则宽度仍为 1512px，高度按内容自适应；只有用户明确要求“按参考图同尺寸输出”时，参考图像素才可作为画板尺寸。',
   },
   {
     title: '2. 先查 Figma 文件已订阅的 Library',
@@ -114,30 +114,35 @@ const generationRules = [
   {
     title: '1. Storybook 优先级',
     body: '使用 Storybook 生成 Figma 设计稿时，Storybook 的 token、组件 API、组件状态、iconMap 和默认画板尺寸优先级高于参考图截图。',
-    examples: ['默认画板使用 1512 × 982', '参考图 1520 × 982 时仍以 Storybook token 为准', '颜色、字号、圆角、间距优先读取 --xue-* token'],
+    examples: ['默认画板使用 1512 × 982', '参考图 2048 × 922 时不能自动使用 2048 × 922', '颜色、字号、圆角、间距优先读取 --xue-* token'],
   },
   {
-    title: '2. 组件必须先查再画',
+    title: '2. 参考图尺寸不等于画板尺寸',
+    body: '参考图只用于识别页面内容、信息结构和业务状态，不决定画板尺寸、组件尺寸、行高或控件间距。画板尺寸优先读取 Storybook 页面规则和 --xue-page-width / --xue-page-height；组件尺寸优先读取组件源码和 token。',
+    examples: ['参考图像素 2048 × 922，只能作为截图来源信息', 'SearchInput 仍按 Storybook 240 × 36', 'Table 仍按 header 40px / row 48px', 'Pagination 仍按 24px 按钮'],
+  },
+  {
+    title: '3. 组件必须先查再画',
     body: '生成前先查 Storybook 是否已有组件；已有组件必须按组件 API 和状态还原，不能先手动画近似组件。',
     examples: ['XueButton: content / color / size / disabled', 'XueTag: color / styleType / closable / icon', 'XueTabs: variant / size / active item'],
   },
   {
-    title: '3. Icon 必须精确映射',
+    title: '4. Icon 必须精确映射',
     body: 'Icon 必须先查 页面规则/Icon 映射表。映射表有 componentKey 时使用 Figma 组件实例；componentKey 为空时才允许从 XueIcon 的 iconMap SVG path 生成。禁止用文字、圆形、矩形临时拼近似图标；缺失 icon 必须明确标注。',
     examples: ['工作台 -> grid-fill', '课程资料 -> folder-fill', '作业 -> paper', '帮助 -> question', '云端 -> cloud', '更多 -> more', '图层命名 -> Storybook/XueIcon {name}'],
   },
   {
-    title: '4. 页面级缺口要标注',
+    title: '5. 页面级缺口要标注',
     body: '如果 Storybook 没有页面级业务组件，可以用基础组件组合，但图层命名必须说明 composed from 哪些 Storybook 组件。',
     examples: ['ClassCard composed from XueTag', 'QuickEntryCard composed from XueIcon + token card', 'DataPanel composed from XueTabs + XueButton + XueTable'],
   },
   {
-    title: '5. 必须生成 Auto Layout 版',
+    title: '6. 必须生成 Auto Layout 版',
     body: 'Figma 设计稿必须优先使用 Auto Layout，禁止整页主要依赖绝对坐标堆图层。绝对定位只允许用于图标细节、装饰元素或特殊遮罩。',
     examples: ['AppShell: horizontal', 'Main: vertical fill', 'ClassList: vertical', 'Toolbar: horizontal', 'Table: vertical + row horizontal'],
   },
   {
-    title: '6. Sizing 必须明确',
+    title: '7. Sizing 必须明确',
     body: 'Auto Layout 中每个关键层级都要明确 FIXED / HUG / FILL。表格可以固定列宽，但表格整体、表头和表行必须用 Auto Layout 组织。',
     examples: ['Sidebar fixed 180', 'Topbar fixed 60', 'Main fill', 'Button hug', 'Table row horizontal', 'Table cell fixed width'],
   },
@@ -150,7 +155,7 @@ const deliveryChecks = [
   },
   {
     title: '2. 生成后必须截图校验',
-    body: '截图校验不只看整体，还要检查画板尺寸、icon 是否匹配、文本是否溢出、操作列是否换行、是否存在多余说明文字。',
+    body: '截图校验不只看整体，还要检查画板尺寸是否来自 Storybook 页面规则而不是参考图原图像素，icon 是否匹配、文本是否溢出、操作列是否换行、是否存在多余说明文字。',
   },
   {
     title: '3. Auto Layout 必须验收',
