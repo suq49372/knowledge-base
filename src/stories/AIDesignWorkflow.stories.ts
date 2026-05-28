@@ -102,7 +102,7 @@ const lookupSteps = [
   },
   {
     title: '5. 遵守 Icon 调用规则',
-    body: '不能凭视觉猜 icon。先查 Figma Library 的真实 icon 名，再查 Storybook 的 XueIcon 是否支持同名或别名。',
+    body: '不能凭视觉猜 icon。先查 页面规则/Icon 映射表，再查 Figma Library 的真实 icon 名，最后用 Storybook 的 XueIcon iconMap 校验路径。',
   },
   {
     title: '6. 输出时必须附带审计说明',
@@ -123,8 +123,8 @@ const generationRules = [
   },
   {
     title: '3. Icon 必须精确映射',
-    body: 'Icon 必须从 XueIcon 的 iconMap 精确映射。禁止用文字、圆形、矩形临时拼近似图标；缺失 icon 必须明确标注。',
-    examples: ['工作台 -> grid-fill', '课程资料 -> folder-fill', '作业 -> paper', '帮助 -> question', '云端 -> cloud', '更多 -> more'],
+    body: 'Icon 必须先查 页面规则/Icon 映射表。映射表有 componentKey 时使用 Figma 组件实例；componentKey 为空时才允许从 XueIcon 的 iconMap SVG path 生成。禁止用文字、圆形、矩形临时拼近似图标；缺失 icon 必须明确标注。',
+    examples: ['工作台 -> grid-fill', '课程资料 -> folder-fill', '作业 -> paper', '帮助 -> question', '云端 -> cloud', '更多 -> more', '图层命名 -> Storybook/XueIcon {name}'],
   },
   {
     title: '4. 页面级缺口要标注',
@@ -162,7 +162,7 @@ const deliveryChecks = [
   },
   {
     title: '5. 最终必须做组件审计',
-    body: '交付说明必须列出已使用 Storybook 组件、组合组件、缺失组件/图标、是否修改 Storybook。',
+    body: '交付说明必须列出已使用 Storybook 组件、组合组件、缺失组件/图标、是否修改 Storybook；Icon 审计必须说明哪些来自 Figma componentKey，哪些来自 XueIcon SVG path fallback。',
   },
 ];
 

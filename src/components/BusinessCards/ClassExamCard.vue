@@ -44,10 +44,10 @@ const props = withDefaults(
 .xue-class-exam-card {
   position: relative;
   display: grid;
-  width: 280px;
-  min-height: 88px;
-  gap: var(--xue-padding-14, 14px);
-  border: 1px solid var(--xue-border);
+  width: var(--xue-business-card-class-width);
+  min-height: var(--xue-business-card-class-min-height);
+  gap: var(--xue-padding-14);
+  border: var(--xue-stroke-divider) solid var(--xue-border);
   border-radius: var(--xue-radius-6);
   background: var(--xue-white);
   padding: var(--xue-padding-16);
@@ -59,13 +59,13 @@ const props = withDefaults(
   }
 
   &--exam {
-    min-height: 156px;
+    min-height: var(--xue-business-card-exam-min-height);
   }
 
   &--tab {
     display: inline-flex;
     width: auto;
-    min-height: 32px;
+    min-height: var(--xue-business-card-tab-min-height);
     align-items: center;
     gap: var(--xue-padding-8);
     padding: var(--xue-padding-4) var(--xue-padding-8);
@@ -102,8 +102,8 @@ const props = withDefaults(
 
 .xue-class-exam-card__more {
   position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: var(--xue-padding-16);
+  bottom: var(--xue-padding-16);
   color: var(--xue-text-secondary);
 }
 </style>

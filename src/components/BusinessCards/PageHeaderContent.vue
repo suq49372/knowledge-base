@@ -47,7 +47,7 @@ const tabs = [
 <style scoped lang="scss">
 .xue-page-header-content {
   display: flex;
-  width: 1364px;
+  width: var(--xue-business-card-page-header-width);
   flex-direction: column;
   gap: var(--xue-padding-16);
   border-radius: var(--xue-radius-8);

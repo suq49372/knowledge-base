@@ -32,13 +32,13 @@ const props = withDefaults(
 <style scoped lang="scss">
 .xue-result-card {
   display: flex;
-  width: 400px;
-  min-height: 184px;
+  width: var(--xue-business-card-result-width);
+  min-height: var(--xue-business-card-result-min-height);
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--xue-padding-12);
-  border: 1px solid var(--xue-divider);
+  border: var(--xue-stroke-divider) solid var(--xue-divider);
   border-radius: var(--xue-radius-8);
   background: var(--xue-white);
   padding: var(--xue-padding-24);

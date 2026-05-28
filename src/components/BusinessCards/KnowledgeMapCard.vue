@@ -32,11 +32,11 @@ const props = withDefaults(
 <style scoped lang="scss">
 .xue-knowledge-map-card {
   display: flex;
-  width: 400px;
-  height: 96px;
+  width: var(--xue-business-card-map-width);
+  height: var(--xue-business-card-map-height);
   align-items: center;
   gap: var(--xue-padding-16);
-  border: 1px solid var(--xue-divider);
+  border: var(--xue-stroke-divider) solid var(--xue-divider);
   border-radius: var(--xue-radius-8);
   background: var(--xue-white);
   padding: var(--xue-padding-20);
@@ -50,8 +50,8 @@ const props = withDefaults(
 
 .xue-knowledge-map-card__icon {
   display: inline-flex;
-  width: 40px;
-  height: 40px;
+  width: var(--xue-business-card-icon-lg);
+  height: var(--xue-business-card-icon-lg);
   align-items: center;
   justify-content: center;
   border-radius: var(--xue-radius-8);

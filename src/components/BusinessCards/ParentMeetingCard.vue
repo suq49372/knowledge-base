@@ -47,12 +47,12 @@ const stateLabel = {
 <style scoped lang="scss">
 .xue-parent-meeting-card {
   display: flex;
-  width: 291px;
-  min-height: 172px;
+  width: var(--xue-business-card-parent-width);
+  min-height: var(--xue-business-card-parent-min-height);
   flex-direction: column;
   justify-content: space-between;
   gap: var(--xue-padding-16);
-  border: 1px solid var(--xue-divider);
+  border: var(--xue-stroke-divider) solid var(--xue-divider);
   border-radius: var(--xue-radius-8);
   background: var(--xue-white);
   padding: var(--xue-padding-20);
@@ -67,8 +67,8 @@ const stateLabel = {
 
 .xue-parent-meeting-card__icon {
   display: inline-flex;
-  width: 40px;
-  height: 40px;
+  width: var(--xue-business-card-icon-lg);
+  height: var(--xue-business-card-icon-lg);
   align-items: center;
   justify-content: center;
   border-radius: var(--xue-radius-8);

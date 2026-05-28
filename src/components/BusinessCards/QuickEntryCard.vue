@@ -32,10 +32,10 @@ const props = withDefaults(
 <style scoped lang="scss">
 .xue-quick-entry-card {
   display: inline-flex;
-  width: 214px;
-  height: 74px;
+  width: var(--xue-business-card-quick-width);
+  height: var(--xue-business-card-quick-height);
   align-items: center;
-  gap: 16px;
+  gap: var(--xue-padding-16);
   border-radius: var(--xue-radius-6);
   background: var(--xue-surface-light);
   padding: 0 var(--xue-padding-24);
@@ -44,8 +44,8 @@ const props = withDefaults(
 
 .xue-quick-entry-card__icon {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
+  width: var(--xue-business-card-icon-md);
+  height: var(--xue-business-card-icon-md);
   align-items: center;
   justify-content: center;
   border-radius: var(--xue-radius-6);
@@ -59,7 +59,7 @@ const props = withDefaults(
 
 .xue-quick-entry-card__content {
   display: grid;
-  gap: 4px;
+  gap: var(--xue-padding-4);
   min-width: 0;
 
   strong {

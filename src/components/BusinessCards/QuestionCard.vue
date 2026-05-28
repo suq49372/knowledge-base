@@ -93,10 +93,10 @@ const props = withDefaults(
 <style scoped lang="scss">
 .xue-question-card {
   display: flex;
-  width: 818px;
+  width: var(--xue-business-card-question-width);
   flex-direction: column;
   gap: var(--xue-padding-16);
-  border: 1px solid var(--xue-divider);
+  border: var(--xue-stroke-divider) solid var(--xue-divider);
   border-radius: var(--xue-radius-8);
   background: var(--xue-white);
   padding: var(--xue-padding-20);
@@ -128,7 +128,7 @@ const props = withDefaults(
 
 .xue-question-card__source {
   overflow: hidden;
-  max-width: 180px;
+  max-width: var(--xue-business-card-question-source-max-width);
   color: var(--xue-text-primary);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -143,8 +143,8 @@ const props = withDefaults(
   color: var(--xue-text-secondary);
 
   > span {
-    width: 1px;
-    height: 12px;
+    width: var(--xue-business-card-divider-width);
+    height: var(--xue-business-card-divider-height);
     background: var(--xue-divider);
   }
 }
@@ -192,7 +192,7 @@ const props = withDefaults(
 
 .xue-question-card__footer {
   gap: var(--xue-padding-24);
-  border-top: 1px solid var(--xue-divider);
+  border-top: var(--xue-stroke-divider) solid var(--xue-divider);
   padding-top: var(--xue-padding-16);
   color: var(--xue-text-secondary);
   font-size: var(--xue-font-size-12);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import XueIcon, { type XueIconName } from '../Icon/Icon.vue';
+import XueLogo from '../Logo/Logo.vue';
 
 export type XueSidebarItem = {
   label: string;
@@ -73,8 +74,7 @@ const collapsedItems = computed(() => {
   >
     <header class="xue-sidebar__header">
       <div v-if="!props.collapsed" class="xue-sidebar__logo">
-        <span class="xue-sidebar__logo-mark" />
-        <span class="xue-sidebar__logo-text">{{ props.logoText }}</span>
+        <XueLogo :alt="props.logoText" :width="94" />
       </div>
       <button class="xue-sidebar__fold" type="button" aria-label="折叠菜单">
         <XueIcon name="menu-fold" :size="18" />
@@ -164,47 +164,7 @@ const collapsedItems = computed(() => {
 .xue-sidebar__logo {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   padding-left: var(--xue-padding-8);
-}
-
-.xue-sidebar__logo-mark {
-  position: relative;
-  width: 28px;
-  height: 28px;
-
-  &::before,
-  &::after {
-    position: absolute;
-    display: block;
-    border-radius: 2px;
-    content: '';
-  }
-
-  &::before {
-    left: 3px;
-    top: 8px;
-    width: 16px;
-    height: 6px;
-    background: linear-gradient(135deg, #00c27b 0%, #21d0ee 100%);
-    transform: skewX(-16deg);
-  }
-
-  &::after {
-    left: 11px;
-    top: 9px;
-    width: 14px;
-    height: 14px;
-    background: var(--xue-primary);
-    clip-path: polygon(28% 0, 100% 0, 70% 100%, 0 100%);
-  }
-}
-
-.xue-sidebar__logo-text {
-  font-size: var(--xue-font-size-16);
-  line-height: var(--xue-line-height-16);
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .xue-sidebar__fold {

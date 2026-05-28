@@ -1,0 +1,104 @@
+.icon-mapping-page {
+  min-height: 100vh;
+  padding: var(--xue-padding-32);
+  background: var(--xue-surface-light);
+  color: var(--xue-text-primary);
+  font-family: var(--xue-font-family);
+}
+
+.icon-mapping-page__header {
+  display: grid;
+  max-width: 960px;
+  gap: var(--xue-padding-8);
+  margin-bottom: var(--xue-padding-32);
+}
+
+.icon-mapping-page__eyebrow {
+  color: var(--xue-primary);
+  font-size: var(--xue-font-size-12);
+  font-weight: var(--xue-font-weight-bold);
+  line-height: var(--xue-line-height-12);
+}
+
+.icon-mapping-page__title {
+  margin: 0;
+  font-size: var(--xue-font-size-20);
+  font-weight: var(--xue-font-weight-medium);
+  line-height: var(--xue-line-height-20);
+}
+
+.icon-mapping-page__description,
+.icon-mapping-policy {
+  margin: 0;
+  color: var(--xue-text-secondary);
+  font-size: var(--xue-font-size-14);
+  line-height: var(--xue-line-height-14);
+}
+
+.icon-mapping-section {
+  display: grid;
+  gap: var(--xue-padding-14);
+  margin-bottom: var(--xue-padding-32);
+}
+
+.icon-mapping-section__title {
+  margin: 0;
+  font-size: var(--xue-font-size-16);
+  font-weight: var(--xue-font-weight-medium);
+  line-height: var(--xue-line-height-16);
+}
+
+.icon-mapping-policy {
+  display: grid;
+  gap: var(--xue-padding-8);
+  padding-left: var(--xue-padding-20);
+}
+
+.icon-mapping-table {
+  overflow: hidden;
+  border: var(--xue-stroke-divider) solid var(--xue-divider);
+  border-radius: var(--xue-radius-8);
+  background: var(--xue-white);
+}
+
+.icon-mapping-table__row {
+  display: grid;
+  grid-template-columns: 64px 220px 160px 220px minmax(180px, 1fr) 180px;
+  min-height: 48px;
+  align-items: center;
+  gap: var(--xue-padding-12);
+  padding: 0 var(--xue-padding-16);
+  border-bottom: var(--xue-stroke-divider) solid var(--xue-divider);
+  color: var(--xue-text-secondary);
+  font-size: var(--xue-font-size-14);
+  line-height: var(--xue-line-height-14);
+}
+
+.icon-mapping-table__row:last-child {
+  border-bottom: 0;
+}
+
+.icon-mapping-table__row--header {
+  min-height: 44px;
+  background: var(--xue-surface-light);
+  color: var(--xue-text-primary);
+  font-weight: var(--xue-font-weight-medium);
+}
+
+.icon-mapping-table__preview {
+  display: inline-flex;
+  width: var(--xue-control-base);
+  height: var(--xue-control-base);
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--xue-radius-6);
+  background: var(--xue-primary-subtle);
+  color: var(--xue-primary);
+}
+
+.icon-mapping-table code {
+  color: var(--xue-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: var(--xue-font-size-12);
+  overflow-wrap: anywhere;
+}
