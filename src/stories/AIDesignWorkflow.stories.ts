@@ -20,8 +20,8 @@ const workflowRules = [
   {
     title: '3. 参考图使用原则',
     body: [
-      '参考图只作为参考，不做无关延展。',
-      '你给什么参考图，我只围绕图中明确出现的功能和场景做设计。',
+      '参考图默认只用于提取数据、文案、业务状态、流程和用户任务，不继承其视觉样式、布局、颜色、卡片形式、间距、信息层级或画板尺寸。',
+      '你给什么参考图，我只围绕图中明确出现的功能和场景做设计；只有你明确要求“按参考图视觉还原”时，才允许继承参考图视觉。',
       '不自行补充后续步骤、隐藏页面或未知业务内容。',
     ],
   },
@@ -39,8 +39,11 @@ const workflowRules = [
   },
   {
     title: '6. 优先明确页面信息结构',
-    body: ['设计前优先确认页面的信息组织方式。信息结构确定后，再做视觉布局。'],
-    list: ['按学科组织', '按报告章节组织', '按待办任务组织', '按流程步骤组织', '按数据类型组织'],
+    body: [
+      '设计前优先确认页面的信息组织方式。信息结构确定后，再做视觉布局。',
+      '进入 Figma 前必须先说明用户进入页面的目的、主任务、辅助信息、异常信息、数据之间的业务关系，并给出 2-3 种可选页面结构方案供确认。',
+    ],
+    list: ['按学科组织', '按报告章节组织', '按待办任务组织', '按流程步骤组织', '按数据类型组织', '按行动优先级组织'],
   },
   {
     title: '7. 设计稿必须同时参考 Figma Library 和 Storybook',
@@ -127,24 +130,44 @@ const generationRules = [
     examples: ['XueButton: content / color / size / disabled', 'XueTag: color / styleType / closable / icon', 'XueTabs: variant / size / active item'],
   },
   {
-    title: '4. Icon 必须精确映射',
+    title: '4. 指标必须先归类再展示',
+    body: '遇到多个指标时，必须先分析分母、分子、流程关系、异常归属和行动优先级，再决定合并、分组、降级或突出展示。禁止把参考图里的指标机械平铺成等权重卡片。',
+    examples: ['提交率 = 已提交 / 已生成', '批改率 = 已批改 / 已提交', '未生成是生成异常，不应抢批改主任务', '待办指标优先承载主行动'],
+  },
+  {
+    title: '5. 高保真不等于复刻参考图视觉',
+    body: '“高保真”指严格基于 Storybook token、组件尺寸、组件状态、Auto Layout 和页面规则生成的高完成度设计稿，不等于复刻参考图视觉。只有用户明确要求“按参考图视觉还原”时，才允许继承参考图的视觉样式。',
+    examples: ['参考图只提供数据和业务内容', '组件尺寸仍以 Storybook 源码为准', '页面层级按用户任务重新组织'],
+  },
+  {
+    title: '6. Icon 必须精确映射',
     body: 'Icon 必须先查 页面规则/Icon 映射表。映射表有 componentKey 时使用 Figma 组件实例；componentKey 为空时才允许从 XueIcon 的 iconMap SVG path 生成。禁止用文字、圆形、矩形临时拼近似图标；缺失 icon 必须明确标注。',
     examples: ['工作台 -> grid-fill', '课程资料 -> folder-fill', '作业 -> paper', '帮助 -> question', '云端 -> cloud', '更多 -> more', '图层命名 -> Storybook/XueIcon {name}'],
   },
   {
-    title: '5. 页面级缺口要标注',
+    title: '7. 页面级缺口要标注',
     body: '如果 Storybook 没有页面级业务组件，可以用基础组件组合，但图层命名必须说明 composed from 哪些 Storybook 组件。',
     examples: ['ClassCard composed from XueTag', 'QuickEntryCard composed from XueIcon + token card', 'DataPanel composed from XueTabs + XueButton + XueTable'],
   },
   {
-    title: '6. 必须生成 Auto Layout 版',
+    title: '8. 必须生成 Auto Layout 版',
     body: 'Figma 设计稿必须优先使用 Auto Layout，禁止整页主要依赖绝对坐标堆图层。绝对定位只允许用于图标细节、装饰元素或特殊遮罩。',
     examples: ['AppShell: horizontal', 'Main: vertical fill', 'ClassList: vertical', 'Toolbar: horizontal', 'Table: vertical + row horizontal'],
   },
   {
-    title: '7. Sizing 必须明确',
+    title: '9. Sizing 必须明确',
     body: 'Auto Layout 中每个关键层级都要明确 FIXED / HUG / FILL。表格可以固定列宽，但表格整体、表头和表行必须用 Auto Layout 组织。',
     examples: ['Sidebar fixed 180', 'Topbar fixed 60', 'Main fill', 'Button hug', 'Table row horizontal', 'Table cell fixed width'],
+  },
+  {
+    title: '10. 模块分层不依赖大量分割线',
+    body: '模块区分优先使用间距、浅背景、卡片边界和标题层级，不依赖连续横向分割线切碎页面。分割线只用于必要边界，例如 Header 底线、表格行边界。',
+    examples: ['Summary 与 Content 用间距区分', 'Queue 用浅背景承载工作区', '避免 Header、卡片、考点、表格之间层层加线'],
+  },
+  {
+    title: '11. 表格必须对齐所属模块',
+    body: '表格必须和所属模块内的标题、筛选、搜索保持统一左右内边距；toolbar 与 table 宽度应对齐，表格不能贴模块边缘。',
+    examples: ['模块 padding 16px 时，toolbar/table 使用内部内容宽度', 'Tabs、SearchInput、Table 左右边界一致', '表格行宽必须同步表格容器宽度'],
   },
 ];
 
@@ -155,7 +178,7 @@ const deliveryChecks = [
   },
   {
     title: '2. 生成后必须截图校验',
-    body: '截图校验不只看整体，还要检查画板尺寸是否来自 Storybook 页面规则而不是参考图原图像素，icon 是否匹配、文本是否溢出、操作列是否换行、是否存在多余说明文字。',
+    body: '截图校验不只看整体，还要检查画板尺寸是否来自 Storybook 页面规则而不是参考图原图像素，icon 是否匹配、文本是否溢出、操作列是否换行、模块分割线是否过多、表格左右边距是否和 toolbar 对齐、是否存在多余说明文字。',
   },
   {
     title: '3. Auto Layout 必须验收',
